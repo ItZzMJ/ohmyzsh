@@ -104,37 +104,3 @@ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-# aliases
-alias zshconfig="nano ~/.zshrc"
-alias ohmyzsh= "mate ~/.oh-my-zsh"
-alias dpa="docker ps -a"
-alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
-alias t200="tail -n200"
-alias pc="sudo pwncat-cs"
-alias ssh2john="python /opt/thm/john/run/ssh2john.py"
-alias john="/opt/thm/john/run/john"
-alias noblanklines="sed '/^[[:space:]]*$/d'"
-alias dt="docker-this"
-alias dct="docker-config-this"
-alias dst="docker-secret-this"
-alias dj="docker-join"
-alias totp="oathtool --base32 --totp"
-alias djm="python3 manage.py"
-
-# enable auto-suggestions based on the history
-# if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-#     . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-     # change suggestion color
-#     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
-# fi
-
-# enable command-not-found if installed
-# if [ -f $ZSH/custom/plugins/zsh-command-not-found/zsh_command_not_found.sh ]; then
-#     . /etc/zsh_command_not_found
-# fi
