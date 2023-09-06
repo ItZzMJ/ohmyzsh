@@ -45,7 +45,7 @@ git_prompt() {
     if [ ! -z "$(git_prompt_info)" ]
     then
         # color master red
-        if [[ $GITPROMPT == *"master"* ]]
+        if [[ $GITPROMPT == *"master"* ]] || [[ $GITPROMPT == *"main"* ]]
         then
             PROMPTCOLOR+=$'%F{red}'
         else
