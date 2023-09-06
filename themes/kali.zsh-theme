@@ -30,12 +30,44 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+####### Start Customized #######
+ZSH_THEME_GIT_PROMPT_DIRTY="*"
+
+# set the git_prompt_info text
+git_prompt() {
+    GITPROMPT=$(git_prompt_info)
+    PREFIX="%F{%(#.blue.green)}(%f"
+    SUFFIX="%F{%(#.blue.green)})-%f"
+
+    PROMPTCOLOR=''
+    if [ ! -z "${GITPROMPT}" ]
+    then
+        # color master red
+        if [[ $GITPROMPT == *"master"* ]]
+        then
+            PROMPTCOLOR+=$'%{$fg[red]%}'
+        else
+            PROMPTCOLOR+=$'%{$fg[green]%}'
+        fi
+
+        echo "$PREFIX%B$PROMPTCOLOR$GITPROMPT%b$SUFFIX"
+    fi
+}
+
 configure_prompt() {
     prompt_symbol=㉿
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n$prompt_symbol%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}'
+            PROMPT+=$'${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}'
+            PROMPT+=$'(%B%F{%(#.red.cyan)}%n'
+            PROMPT+=$'%F{%(#.red.blue)}$prompt_symbol'
+            PROMPT+=$'%F{%(#.red.blue)}%m%b%F{%(#.blue.green)})-'
+            PROMPT+=$'[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n'
+            PROMPT+="└─$(git_prompt)"
+            PROMPT+=$'%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
@@ -48,6 +80,7 @@ configure_prompt() {
             ;;
     esac
 }
+####### End Customized #######
 
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
