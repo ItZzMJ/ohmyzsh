@@ -81,7 +81,6 @@ plugins=(
   docker
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-exa
 )
 
 source $ZSH/oh-my-zsh.sh
