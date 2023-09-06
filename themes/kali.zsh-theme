@@ -31,6 +31,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 ####### Start Customized #######
+ZSH_THEME_GIT_PROMPT_PREFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
 
 # set the git_prompt_info text
@@ -40,17 +42,17 @@ git_prompt() {
     SUFFIX="%F{%(#.blue.green)})-%f"
 
     PROMPTCOLOR=''
-    if [ ! -z "${GITPROMPT}" ]
+    if [ ! -z "$(git_prompt_info)" ]
     then
         # color master red
         if [[ $GITPROMPT == *"master"* ]]
         then
-            PROMPTCOLOR+=$'%{$fg[red]%}'
+            PROMPTCOLOR+=$'%F{red}'
         else
-            PROMPTCOLOR+=$'%{$fg[green]%}'
+            PROMPTCOLOR+=$'%F{green}'
         fi
 
-        echo "$PREFIX%B$PROMPTCOLOR$GITPROMPT%b$SUFFIX"
+        echo "${PREFIX}%B${PROMPTCOLOR}${GITPROMPT}%b${SUFFIX}"
     fi
 }
 
@@ -65,7 +67,7 @@ configure_prompt() {
             PROMPT+=$'%F{%(#.red.blue)}$prompt_symbol'
             PROMPT+=$'%F{%(#.red.blue)}%m%b%F{%(#.blue.green)})-'
             PROMPT+=$'[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n'
-            PROMPT+="└─$(git_prompt)"
+            PROMPT+=$'└─$(git_prompt)'
             PROMPT+=$'%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
 
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
