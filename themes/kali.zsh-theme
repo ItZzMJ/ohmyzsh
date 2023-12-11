@@ -34,6 +34,7 @@ fi
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # set the git_prompt_info text
 git_prompt() {
